@@ -24,7 +24,8 @@ public class BubbleSort2 extends Sorter {
 		
 		int len = arr.length;
 		for(int i = 0; i < len; ++i) {
-			for(int j = 0; j < len-1; ++j) {
+			int nI = len-i-1;
+			for(int j = 0; j < nI; ++j) {
 				if(arr[j]> arr[j+1]){
 					swap(j,j+1);
 				}
