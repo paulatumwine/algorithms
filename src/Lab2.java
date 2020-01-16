@@ -49,31 +49,20 @@ public class Lab2 {
     }
 
     static int[] merge(int[] arr1, int[] arr2) {
-        int m = arr1.length;
-        int n = arr2.length;
-        int arr3[] = new int[m + n];
+        int arr3[] = new int[arr1.length + arr2.length];
+
         int i = 0, j = 0, k = 0;
-        while (i < m && j < n) {
-            if (arr1[i] <= arr2[j]) {
-                arr3[k] = arr1[i];
-                i++;
-            } else {
-                arr3[k] = arr2[j];
-                j++;
-            }
-            k++;
-        }
-        if (i < m) {
-            for (int p = i; p < m; p++) {
-                arr3[k] = arr1[p];
-                k++;
-            }
-        } else {
-            for (int p = j; p < n; p++) {
-                arr3[k] = arr2[p];
-                k++;
-            }
-        }
+        while (i < arr1.length && j < arr2.length)
+            if (arr1[i] <= arr2[j])
+                arr3[k++] = arr1[i++];
+            else
+                arr3[k++] = arr2[j++];
+
+        while (i < arr1.length)
+            arr3[k++] = arr1[i++];
+
+        while (j < arr2.length)
+            arr3[k++] = arr2[j++];
         return arr3;
     }
 }
