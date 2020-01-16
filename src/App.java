@@ -9,6 +9,10 @@ public class App {
         System.out.println(gcd(12, 42));
         System.out.println(gcd(7, 9));
 
+        System.out.println(computeGcd(12, 20));
+        System.out.println(computeGcd(12, 42));
+        System.out.println(computeGcd(7, 9));
+
         System.out.println(secondSmallest(new int[]{1, 4, 2, 3}));
         System.out.println(secondSmallest(new int[]{3, 3, 4, 7}));
         // System.out.println(secondSmallest(new int[]{9}));
@@ -37,6 +41,17 @@ public class App {
             if (m % i == 0 && n % i == 0) return i;
         }
         return 1;*/
+    }
+
+    /**
+     * Euclidean algorithm
+     * @param m
+     * @param n
+     * @return
+     */
+    static int computeGcd(int m, int n) {
+        if (n == 0) return m;
+        return computeGcd(n, m % n);
     }
 
     static int secondSmallest(int[] arr) {

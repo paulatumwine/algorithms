@@ -5,7 +5,10 @@ public class Lab2 {
     public static void main(String[] args) {
         int[] result = merge(new int[]{1, 4, 5, 8, 17}, new int[]{2, 4, 8, 11, 13, 21, 23, 25});
         System.out.println(Arrays.toString(result));
-        List<Set<Integer>> powerSet = powerSetWithListIterator(List.of(1, 2, 3));
+//        List<Set<Integer>> powerSet = powerSetWithListIterator(List.of(1, 2, 3));
+        List<Integer> list = new ArrayList<>();
+        list.add(1); list.add(2); list.add(3);
+        List<Set<Integer>> powerSet = powerSetWithForLoop(list);
         System.out.println(powerSet);
     }
 
@@ -26,6 +29,25 @@ public class Lab2 {
                 T.addAll(Set.of(f));
 //                System.out.println(T);
                 iterator.add(T);
+            }
+        }
+        return P;
+    }
+
+    static List<Set<Integer>> powerSetWithForLoop(List<Integer> X) {
+        List<Set<Integer>> P = new ArrayList<>();
+        Set<Integer> S = new HashSet<>();
+        P.add(S);
+        if (X.isEmpty()) return P;
+        while (!X.isEmpty()) {
+            Integer f = X.remove(0);
+            Set<Integer> T = new HashSet<>();
+            int size = P.size();
+            for (int i = 0; i < size; i++) {
+                T.addAll(P.get(i));
+                T.add(f);
+                System.out.println(T);
+                P.add(T);
             }
         }
         return P;
