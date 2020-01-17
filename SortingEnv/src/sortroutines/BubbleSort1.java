@@ -32,6 +32,7 @@ public class BubbleSort1 extends Sorter {
 				}
 			}
 			if (swapCount == 0) break;
+			else swapCount = 0;
 		}
 	}
 
