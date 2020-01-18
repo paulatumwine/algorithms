@@ -8,7 +8,11 @@ public class MergeSortPlus extends Sorter {
 	final int ARRAY_SIZE = 33;
 	final int MAX_VAL = 1000;
 	int[] theArray;
+	InsertionSort insertionSort;
 
+	public MergeSortPlus() {
+		insertionSort = new InsertionSort();
+	}
 
 	//public sorter
 	public int[] sort(int[] input){
@@ -20,8 +24,16 @@ public class MergeSortPlus extends Sorter {
 	}
 
 	void mergeSort(int[] tempStorage, int lower, int upper) {
-		if(lower==upper){
-			return;
+		int len = (upper - lower) + 1;
+		if(len < 20){
+			int[] tmp = new int[len];
+			for(int i=lower; i<=upper; i++) {
+				tmp[i-lower] = theArray[i];
+			}
+			tmp = insertionSort.sort(tmp);
+			for(int i=lower; i<=upper; i++) {
+				theArray[i] = tmp[i-lower];
+			}
 		}
 
 		else {
@@ -67,7 +79,8 @@ public class MergeSortPlus extends Sorter {
 	public static void main(String[] args){
 		MergeSortPlus ms = new MergeSortPlus();
 		//ms.testMerge();
-		int[] arr = {1,4,2,5,6,1,7,9,0};
+//		int[] arr = {1,4,2,5,6,1,7,9,0};
+		int[] arr = {1,4,2,5,6,1,7,9,0,1,4,2,5,6,1,7,9,0,1,4,2,5,6,1,7,9,0,1,4,2,5,6,1,7,9,0};
 		int[] returnArr = ms.sort(arr);
 		for (int i : returnArr) {
 			System.out.print(i + " ");
