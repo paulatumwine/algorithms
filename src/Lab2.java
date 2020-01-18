@@ -41,9 +41,9 @@ public class Lab2 {
         if (X.isEmpty()) return P;
         while (!X.isEmpty()) {
             Integer f = X.remove(0);
-            Set<Integer> T = new HashSet<>();
             int size = P.size();
             for (int i = 0; i < size; i++) {
+                Set<Integer> T = new HashSet<>();
                 T.addAll(P.get(i));
                 T.add(f);
                 System.out.println(T);
