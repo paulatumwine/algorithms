@@ -1,16 +1,35 @@
-package lesson7.bst;
+package sortroutines;
+
+import runtime.Sorter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This is a BST that handles Integer data. The insert method works only if
  * there are no duplicates.
  */
-public class MyBST {
+public class BSTSort extends Sorter {
 	/** The tree root. */
 	private Node root;
 
+	/** Sorted array to be output */
+	List<Integer> sarr = new ArrayList<>();
+
 	// start with an empty tree
-	public MyBST() {
+	public BSTSort() {
 		root = null;
+	}
+
+	@Override
+	public int[] sort(int[] arr) {
+		BSTSort sbst = new BSTSort();
+		for (int i = 0; i < arr.length; i++) {
+			sbst.insert(arr[i]);
+		}
+		sbst.printTree();
+		return sbst.sarr.stream().mapToInt(Integer::intValue).toArray();
 	}
 
 	/**
@@ -27,6 +46,7 @@ public class MyBST {
 		if (t != null) {
 			printTree(t.left);
 			System.out.println(t.element);
+			sarr.add(t.element);
 			printTree(t.right);
 		}
 	}
@@ -224,7 +244,7 @@ public class MyBST {
 	// ///////// testing
 
 	public static void main(String[] args) {
-		MyBST bst = new MyBST();
+		BSTSort bst = new BSTSort();
 		for (int i = 15; i >= 0; --i) {
 			bst.insert(new Integer(2 * i));
 			bst.insert(new Integer(2 * i - 5));
@@ -238,7 +258,7 @@ public class MyBST {
 		bst.delete(-5);
 		bst.printTree();
 		// bst2
-		MyBST bst2 = new MyBST();
+		BSTSort bst2 = new BSTSort();
 		System.out.println("\n\nNew tree:\n");
 		populate(bst2);
 		bst2.printTree();
@@ -255,9 +275,14 @@ public class MyBST {
 		System.out.println("\nAfter deleting 37...\n");
 		bst2.printTree();
 
+		int[] test = {21,13,1,-22, 51, 5, 18};
+		BSTSort bs = new BSTSort();
+
+		System.out.println(Arrays.toString(bs.sort(test)));
+
 	}
 
-	private static void populate(MyBST tree) {
+	private static void populate(BSTSort tree) {
 		tree.insert(50);
 		tree.insert(25);
 		tree.insert(75);
