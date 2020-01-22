@@ -4,5 +4,6 @@ BubbleSort1
 BubbleSort
 InsertionSort
 SelectionSort
+MergeSortPlus
 MergeSort
 QuickSort
