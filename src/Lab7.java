@@ -1,4 +1,3 @@
-import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -18,24 +17,15 @@ class Lab7 {
     }
 
     static String reverse(String str) {
-        LinkedList<Stack<Character>> queue = new LinkedList();
-        for (String word: str.split(" ")) {
-            Stack<Character> stack = new Stack<>();
-            for (char c: word.toCharArray()) {
-                stack.push(c);
-            }
-            queue.add(stack);
-        }
-
+        char[] strArr = str.toCharArray();
         StringBuffer buf = new StringBuffer();
-        while (!queue.isEmpty()) {
-            Stack<Character> stack = queue.removeFirst();
-            StringBuffer word = new StringBuffer();
-            while (!stack.empty()) {
-                buf.append(stack.pop());
-            }
-            buf.append(word);
-            buf.append(" ");
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < strArr.length; i++) {
+            if (strArr[i] == ' ' || i == strArr.length - 1) {
+                while (!stack.empty())
+                    buf.append(stack.pop());
+                buf.append(" ");
+            } else stack.push(strArr[i]);
         }
         return buf.toString();
     }
