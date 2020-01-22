@@ -1,5 +1,8 @@
+BSTSort
 BubbleSort2
 BubbleSort1
 BubbleSort
 InsertionSort
 SelectionSort
+MergeSort
+QuickSort

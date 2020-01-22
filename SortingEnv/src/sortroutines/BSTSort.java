@@ -45,7 +45,7 @@ public class BSTSort extends Sorter {
 	private void printTree(Node t) {
 		if (t != null) {
 			printTree(t.left);
-			System.out.println(t.element);
+//			System.out.println(t.element);
 			sarr.add(t.element);
 			printTree(t.right);
 		}
