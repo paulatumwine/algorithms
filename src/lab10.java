@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Devise a dynamic programming solution for the following problem:
  * Given two strings, find the length of longest subsequence that they share in common.
@@ -5,6 +8,13 @@
  * Substring: the characters in a substring of S must occur contiguously in S.
  * Subsequence: the characters can be interspersed with gaps.
  * For example: Given two Strings - “regular” and “ruler”, your algorithm should output 4.
+ *
+ * Devise a dynamic programming solution for the following problem:
+ * Given a positive integer n, find the least number of perfect square numbers which sum to n.
+ * (Perfect square numbers are 1, 4, 9, 16, 25, 36, 49, …)
+ * For example, given n = 12, return 3; (12 = 4 + 4 + 4)
+ * Given n = 13, return 2; (13 = 4 + 9)
+ * Given n = 67 return 3; (67 = 49 + 9 + 9)
  */
 public class lab10 {
 
@@ -13,6 +23,32 @@ public class lab10 {
     public static void main(String[] args) {
         System.out.println(llcs("regular", "ruler"));
         System.out.println(llcs("jackass", "brass"));
+
+        System.out.println(squares(12));
+        System.out.println(squares(13));
+        System.out.println(squares(67));
+    }
+
+    static List<Integer> squares(int n) {
+        List<Integer> S = new ArrayList<>();
+        for (int i = 1; i*i <= n; i++)
+            S.add(i*i);
+        List<Integer> set = new ArrayList<>();
+        int last = S.get(S.size() - 1);
+        if (last == n) {
+            set.add(n);
+            return set;
+        }
+        int diff = n - last;
+        if (diff > n) {
+            set.add(last);
+            set.addAll(squares(n));
+            return set;
+        } else {
+            set.add(last);
+            set.addAll(squares(diff));
+            return set;
+        }
     }
 
     static int llcs(String A, String B) {
