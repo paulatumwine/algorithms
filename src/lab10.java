@@ -27,6 +27,75 @@ public class lab10 {
         System.out.println(squares(12));
         System.out.println(squares(13));
         System.out.println(squares(67));
+
+        System.out.println(getMinSquares(12));
+        System.out.println(getMinSquares(13));
+//        System.out.println(getMinSquares(67));
+
+        System.out.println(lnps(12));
+        System.out.println(lnps(13));
+//        System.out.println(lnps(67));
+
+        System.out.println(lnspdpw(12));
+        System.out.println(lnspdpw(13));
+        System.out.println(lnspdpw(67));
+    }
+
+    static int[] A;
+    static int lnspdpw(int n) {
+        A = new int[n];
+        return lnpsdp(n);
+    }
+
+    static int lnpsdp(int n) {
+        System.out.println("Computing for n = "+n);
+        List<Integer> S = new ArrayList<>();
+        for (int i = 1; i*i <= n; i++)
+            S.add(i*i);
+        if (S.contains(n)) return 1;
+        int res = n;
+        for (int s: S) {
+            int diff = n - s;
+            if (A[diff] == 0) A[diff] = lnpsdp(diff) + 1;
+            res = Math.min(res, A[diff]);
+        }
+        return res;
+    }
+
+    static int lnps(int n) {
+        System.out.println("Computing for n = "+n);
+        List<Integer> S = new ArrayList<>();
+        for (int i = 1; i*i <= n; i++)
+            S.add(i*i);
+        if (S.contains(n)) return 1;
+        int res = n;
+        for (int s: S)
+            res = Math.min(res, lnps(n - s)+ 1);
+        return res;
+    }
+
+    // Returns count of minimum squares that sum to n
+    static int getMinSquares(int n)
+    {
+        // base cases
+        if (n <= 3)
+            return n;
+
+        // getMinSquares rest of the table using recursive
+        // formula
+        int res = n; // Maximum squares required is
+        // n (1*1 + 1*1 + ..)
+
+        // Go through all smaller numbers
+        // to recursively find minimum
+        for (int x = 1; x <= n; x++) {
+            int temp = x * x;
+            if (temp > n)
+                break;
+            else
+                res = Math.min(res, 1 + getMinSquares(n - temp));
+        }
+        return res;
     }
 
     static List<Integer> squares(int n) {
