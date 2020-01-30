@@ -1,10 +1,20 @@
 public class IsConnected extends BreadthFirstSearch {
+
+	int counter;
+
 	public IsConnected(Graph graph) {
 		super(graph);
+		counter = 0;
 	}
 
-	//TO-DO
+	@Override
+	protected void additionalProcessing() {
+		super.additionalProcessing();
+		counter++;
+	}
+
 	public boolean isConnected() {
-		return false;
+		start();
+		return counter == 1;
 	}
 }

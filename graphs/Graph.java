@@ -56,9 +56,8 @@ public class Graph {
 		return edges;
 	}
 
-	//TO-DO
 	public boolean isConnected() {
-		return false;
+		return new IsConnected(this).isConnected();
 	}
 	//TO-DO
 	public boolean hasPathBetween(Vertex u, Vertex v) {
