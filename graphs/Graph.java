@@ -64,9 +64,9 @@ public class Graph {
 	public boolean hasPathBetween(Vertex u, Vertex v) {
 		return false;
 	}
-	//TO-DO
+
 	public boolean containsCycle() {
-		return false;
+		return new HasCycle(this).hasCycle();
 	}
 	//TO-DO
     int shortestPathLength(Vertex u, Vertex v) {
