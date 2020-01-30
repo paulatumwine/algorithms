@@ -59,9 +59,9 @@ public class Graph {
 	public boolean isConnected() {
 		return new IsConnected(this).isConnected();
 	}
-	//TO-DO
+
 	public boolean hasPathBetween(Vertex u, Vertex v) {
-		return false;
+		return new PathExists(this).pathExists(u, v);
 	}
 
 	public boolean containsCycle() {
