@@ -67,9 +67,9 @@ public class Graph {
 	public boolean containsCycle() {
 		return new HasCycle(this).hasCycle();
 	}
-	//TO-DO
+
     int shortestPathLength(Vertex u, Vertex v) {
-    	return -1;
+    	return new ShortestPath(this).computeShortestPathLength(u, v);
     }
 
 	/**

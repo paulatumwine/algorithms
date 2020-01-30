@@ -42,7 +42,8 @@ public class Main {
 		Graph cg = new Graph(list);
 		Vertex start = new Vertex("A");
 		Vertex end = new Vertex("D");
+		System.out.println("The main graph:\n "+cg);
 		System.out.println("Shortest Path/Shortest Path Length:");
-		System.out.println(g.shortestPathLength(start, end));
+		System.out.println(cg.shortestPathLength(start, end));
 	}
 }

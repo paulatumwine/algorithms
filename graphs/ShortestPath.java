@@ -10,8 +10,18 @@ public class ShortestPath extends BreadthFirstSearch {
 		super(g);
 
 	}
-	//TO-DO
+
+	@Override
+	protected void processEdge(Edge e) {
+		super.processEdge(e);
+		parentMap.put(e.u, e.v);
+		levelsMap.put(e.u, levelsMap.get(e.v) + 1);
+	}
+
 	public int computeShortestPathLength(Vertex s, Vertex v) {
-		return -1;
+		parentMap.put(s, s);
+		levelsMap.put(s, 0);
+		start(s);
+		return levelsMap.get(v);
 	}
 }
