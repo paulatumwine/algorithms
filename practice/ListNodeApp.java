@@ -1,3 +1,7 @@
+import org.junit.Test;
+
+import java.util.Stack;
+
 public class ListNodeApp {
 
     public static void main(String[] args) {
@@ -32,6 +36,59 @@ public class ListNodeApp {
         ListNode l10 = new ListNode(0);
         node = solution.addTwoNumbers(l9, l10);
         System.out.println(solution.printList(node));
+    }
+
+    public boolean isPalindrome(ListNode head) {
+        Stack<Integer> o = new Stack<>();
+        ListNode p = head;
+        int l = 0, c = 0;
+        while (p != null) {
+            l++;
+            p = p.next;
+        }
+        if (l == 1) return true;
+        p = head;
+        while (p != null && c < l/2) {
+            o.push(p.val);
+            c++;
+            p = p.next;
+        }
+        p = l%2==0 ? p : p.next; // skip middle element for odd size
+        while (p != null) {
+            Integer e = o.pop();
+            if (e != p.val) return false;
+            p = p.next;
+        }
+        return true;
+    }
+
+    @Test
+    public void testIsPalindrome() {
+        ListNode tn = new ListNode(1);
+        tn.next = new ListNode(2);
+        assert false == isPalindrome(tn);
+
+        tn = new ListNode(1);
+        tn.next = new ListNode(2);
+        tn.next.next = new ListNode(2);
+        tn.next.next.next = new ListNode(1);
+        assert true == isPalindrome(tn);
+
+        ListNode cr = tn;
+        for (int i = 0; i < 6; i++) {
+            cr.next = new ListNode(i);
+            cr = cr.next;
+        }
+        assert false == isPalindrome(tn);
+
+        tn = new ListNode(1);
+        assert true == isPalindrome(tn);
+
+
+        tn = new ListNode(1);
+        tn.next = new ListNode(0);
+        tn.next.next = new ListNode(1);
+        assert true == isPalindrome(tn);
     }
 }
 
