@@ -4,7 +4,7 @@ public class Lab2 {
 
     public static void main(String[] args) {
         int[] result = merge(new int[]{1, 4, 5, 8, 17}, new int[]{2, 4, 8, 11, 13, 21, 23, 25});
-        System.out.println(Arrays.toString(result));
+//        System.out.println(Arrays.toString(result));
 //        List<Set<Integer>> powerSet = powerSetWithListIterator(List.of(1, 2, 3));
         List<Integer> list = new ArrayList<>();
         list.add(1); list.add(2); list.add(3);
