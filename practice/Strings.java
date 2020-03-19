@@ -1,5 +1,10 @@
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import static org.junit.Assert.assertEquals;
 
 public class Strings {
@@ -19,6 +24,20 @@ public class Strings {
         System.out.println(Strings.myAtoi("3.14159"));
         System.out.println(Strings.myAtoi("-3.14159"));
         System.out.println(Strings.myAtoi("+1"));
+
+        String str = "sams abbdd  SAM dd  sam..   jj   ..sam  be";
+        System.out.println(str.replaceAll("(?i)sam", "walmart"));
+
+        str = "This sia eclipse random Eclipse ecliPse not a valid ECLIPSE ECLIPSE sdfdsf sdfd";
+        Map<String, Long> map = Arrays.asList(str.split(" "))
+                .stream()
+                .filter(s -> s.matches("(?i)eclipse"))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        System.out.println(map);
+
+        /*Predicate p = s -> s != null;
+        BinaryOperator<Integer> bO = (x, y) -> x * y;
+        BiFunction<String, Boolean, String> g = (x, b) -> x.contains("ABC") == b ? "ABC" : "OTR";*/
     }
 
     public String longestPalindrome(String s) {
