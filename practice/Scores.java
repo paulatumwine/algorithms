@@ -1,24 +1,36 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Scores {
-    Set<Integer> S = Set.of(2, 3, 6, 7, 8);
+    static List<Integer> S;
+    static Map<Integer, Set<List<Integer>>> scores = new HashMap<>();
 
     public static void main(String[] args) {
-        System.out.println(new Scores().countWaysToScore(1));
-        System.out.println(new Scores().countWaysToScore(-1));
-        System.out.println(new Scores().countWaysToScore(6));
-        System.out.println(new Scores().countWaysToScore(5));
-        System.out.println(new Scores().countWaysToScore(8));
-        System.out.println(new Scores().countWaysToScore(2));
-        System.out.println(new Scores().countWaysToScore(100));
+        System.out.println(Scores.countWaysToScore(1));
+        System.out.println(Scores.countWaysToScore(-1));
+        System.out.println(Scores.countWaysToScore(6));
+        System.out.println(Scores.countWaysToScore(5));
+        System.out.println(Scores.countWaysToScore(8));
+        System.out.println(Scores.countWaysToScore(2));
+        System.out.println(Scores.countWaysToScore(15));
+        System.out.println(Scores.countWaysToScore(30));
+        System.out.println(Scores.countWaysToScore(50));
     }
 
-    public Set countWaysToScore(int score) {
+    public static int countWaysToScore(int score) {
+        S = new ArrayList<>();
+        S.add(2);
+        S.add(3);
+        S.add(6);
+        S.add(7);
+        S.add(8);
+        return Scores.getWaysToScore(score).size();
+    }
+    
+
+    public static Set getWaysToScore(int score) {
         Set<List<Integer>> H = new HashSet<>();
         List<Integer> tmp;
+        if (scores.containsKey(score)) return scores.get(score);
         if (score < 2) H.add(new ArrayList<>());
         else if (score == 2 || score == 3) {
             tmp = new ArrayList<>();
@@ -28,11 +40,14 @@ public class Scores {
         else {
             for (Integer s : S) {
                 if (s < score) {
-                    Set<List<Integer>> T = countWaysToScore(score - s);
+                    int diff = score - s;
+                    Set<List<Integer>> T = getWaysToScore(diff);
+                    if (!scores.containsKey(score)) scores.put(diff, T);
                     for (List<Integer> t : T) {
                         if (!t.isEmpty()) {
-                            t.add(s);
-                            H.add(t);
+                            List<Integer> list = new ArrayList<>(t);
+                            list.add(s);
+                            H.add(list);
                         }
                     }
                 } else if (s == score) { //6, 7 or 8
@@ -42,7 +57,7 @@ public class Scores {
                 }
             }
         }
-        System.out.println("Debug; Score " + score + ": " + H);
+//        System.out.println("Debug; Score " + score + ": " + H);
         return H;
     }
 }
