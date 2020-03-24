@@ -1,3 +1,5 @@
+import org.junit.Assert;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,15 +10,17 @@ public class Scores {
     static Map<Integer, Integer> scores = new HashMap<>();
 
     public static void main(String[] args) {
-        System.out.println(Scores.countWaysToScore(1));
-        System.out.println(Scores.countWaysToScore(-1));
-        System.out.println(Scores.countWaysToScore(6));
-        System.out.println(Scores.countWaysToScore(5));
-        System.out.println(Scores.countWaysToScore(8));
-        System.out.println(Scores.countWaysToScore(2));
-        System.out.println(Scores.countWaysToScore(15));
-        System.out.println(Scores.countWaysToScore(30));
-        System.out.println(Scores.countWaysToScore(50));
+
+        Assert.assertEquals(0, Scores.countWaysToScore(1));
+        Assert.assertEquals(0, Scores.countWaysToScore(-1));
+        Assert.assertEquals(3, Scores.countWaysToScore(6));
+        Assert.assertEquals(2, Scores.countWaysToScore(5));
+        Assert.assertEquals(7, Scores.countWaysToScore(8));
+        Assert.assertEquals(1, Scores.countWaysToScore(2));
+        Assert.assertEquals(92, Scores.countWaysToScore(15));
+        Assert.assertEquals(28542, Scores.countWaysToScore(30));
+        Assert.assertEquals(59651728, Scores.countWaysToScore(50));
+        System.out.println("All clear");
     }
 
     public static int countWaysToScore(int score) {
