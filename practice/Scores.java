@@ -1,8 +1,11 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Scores {
     static List<Integer> S;
-    static Map<Integer, Set<List<Integer>>> scores = new HashMap<>();
+    static Map<Integer, Integer> scores = new HashMap<>();
 
     public static void main(String[] args) {
         System.out.println(Scores.countWaysToScore(1));
@@ -23,41 +26,26 @@ public class Scores {
         S.add(6);
         S.add(7);
         S.add(8);
-        return Scores.getWaysToScore(score).size();
+        return Scores.getWaysToScore(score);
     }
-    
 
-    public static Set getWaysToScore(int score) {
-        Set<List<Integer>> H = new HashSet<>();
-        List<Integer> tmp;
+    public static Integer getWaysToScore(int score) {
+        int ways = 0;
+
         if (scores.containsKey(score)) return scores.get(score);
-        if (score < 2) H.add(new ArrayList<>());
-        else if (score == 2 || score == 3) {
-            tmp = new ArrayList<>();
-            tmp.add(score);
-            H.add(tmp);
-        }
+
+        if (score < 2) ways = 0;
+        else if (score == 2 || score == 3) ways++;
         else {
             for (Integer s : S) {
                 if (s < score) {
-                    int diff = score - s;
-                    Set<List<Integer>> T = getWaysToScore(diff);
-                    if (!scores.containsKey(score)) scores.put(diff, T);
-                    for (List<Integer> t : T) {
-                        if (!t.isEmpty()) {
-                            List<Integer> list = new ArrayList<>(t);
-                            list.add(s);
-                            H.add(list);
-                        }
-                    }
-                } else if (s == score) { //6, 7 or 8
-                    tmp = new ArrayList<>();
-                    tmp.add(s);
-                    H.add(tmp);
+                    ways += getWaysToScore(score - s);
                 }
+                else if (s == score) ways++; //6, 7 or 8
             }
         }
-//        System.out.println("Debug; Score " + score + ": " + H);
-        return H;
+//        System.out.println("Debug; Score " + score + ": " + ways);
+        if (!scores.containsKey(score)) scores.put(score, ways);
+        return ways;
     }
 }
