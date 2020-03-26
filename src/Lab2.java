@@ -53,6 +53,42 @@ public class Lab2 {
         return P;
     }
 
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> powerSet = new ArrayList<>();
+
+        List<Integer> subset = new ArrayList<>();
+        powerSet.add(subset);
+        if (nums.length == 0) return powerSet;
+
+        for (int j=0; j<nums.length; j++) {
+            int size = powerSet.size();
+            for (int i = 0; i < size; i++) {
+                subset = new ArrayList<>(powerSet.get(i));
+                subset.add(nums[j]);
+                powerSet.add(subset);
+            }
+        }
+        return powerSet;
+    }
+
+    public List<List<Integer>> subsets1(int[] nums) {
+        List<List<Integer>> output = new ArrayList();
+        output.add(new ArrayList<Integer>());
+
+        for (int num : nums) {
+            List<List<Integer>> newSubsets = new ArrayList();
+            for (List<Integer> curr : output) {
+                newSubsets.add(new ArrayList<>(curr){{
+                    add(num);
+                }});
+            }
+            for (List<Integer> curr : newSubsets) {
+                output.add(curr);
+            }
+        }
+        return output;
+    }
+
     static List<Set<Integer>> powerSetByReplacement(List<Integer> X) {
         List<Set<Integer>> P = new ArrayList<>();
         Set<Integer> S = new HashSet<>();

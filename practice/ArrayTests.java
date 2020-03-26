@@ -6,7 +6,7 @@ import java.util.Map;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class Arrays {
+public class ArrayTests {
 
     public int[] productExceptSelf(int[] nums) {
         int n = nums.length;
